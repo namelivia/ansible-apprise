@@ -13,6 +13,7 @@
     image: "caronc/{{ application_name }}:latest"
     pull: true
     cleanup: true
+    exposed_ports: 8000
     memory: "200MB"
     log_driver: "awslogs"
     log_options:
