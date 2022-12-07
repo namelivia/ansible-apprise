@@ -30,7 +30,7 @@
     memory: "200MB"
     log_driver: "awslogs"
     volumes:
-      - "{{ hostvars[inventory_hostname].working_directory }}{{ application_name }}:/var/lib/apprise/config"
+      - "{{ hostvars[inventory_hostname].working_directory }}{{ application_name }}:/config"
     log_options:
       awslogs-region: "{{ cloudwatch_region }}"
       awslogs-group: "{{ cloudwatch_log_group }}"
