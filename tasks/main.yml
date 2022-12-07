@@ -27,7 +27,11 @@
     exposed_ports: 8000
     memory: "200MB"
     log_driver: "awslogs"
+    volumes:
+      - "{{ hostvars[inventory_hostname].working_directory }}{{ application_name }}:/var/lib/apprise/config"
     log_options:
       awslogs-region: "{{ cloudwatch_region }}"
       awslogs-group: "{{ cloudwatch_log_group }}"
       awslogs-stream: "{{ application_name }}"
+    env:
+      APPRISE_STATEFUL_MODE: "simple"
