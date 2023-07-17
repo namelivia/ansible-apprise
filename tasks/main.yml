@@ -4,9 +4,8 @@
   assert:
     that:
       - application_name is defined
-      - cloudwatch_region is defined
-      - cloudwatch_log_group is defined
       - apprise_config_folder is defined
+      - loki_url is defined
 
 - name: Copy apprise config
   copy:
@@ -28,12 +27,11 @@
     published_ports:
       - "0.0.0.0:9000:8000"  # map the port to the host's 9000 port
     memory: "200MB"
-    log_driver: "awslogs"
     volumes:
       - "{{ hostvars[inventory_hostname].working_directory }}{{ application_name }}:/config"
+    log_driver: "loki"
     log_options:
-      awslogs-region: "{{ cloudwatch_region }}"
-      awslogs-group: "{{ cloudwatch_log_group }}"
-      awslogs-stream: "{{ application_name }}"
+      loki-url: "{{ loki_url }}"
+      loki-batch-size: "400"
     env:
       APPRISE_STATEFUL_MODE: "simple"
