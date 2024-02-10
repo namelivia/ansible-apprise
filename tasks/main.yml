@@ -14,8 +14,8 @@
     owner: ubuntu
     group: ubuntu
     force: true
-    mode: 0644
-    directory_mode: 0775
+    mode: "0644"
+    directory_mode: "0775"
 
 - name: Create app container
   docker_container:
